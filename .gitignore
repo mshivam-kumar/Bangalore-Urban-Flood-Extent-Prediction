@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+
+# Distribution / packaging
+.Python
+MANIFEST
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE settings
+.idea/
+.vscode/
+
+/data/
+/checkpoints/ 
+# /checkpoints/ ignores repo_root/checkpoints/, but not repo_root/some_dir/checkpoints/
+/notebooks/
+*.h5
+*.pth
+
+# Notebook checkpoints
+.ipynb_checkpoints
+/outputs/
+/docs/
+
+# Log files
+/logs/
+*.log

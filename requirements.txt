@@ -1,0 +1,12 @@
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+Pillow
+python-dotenv
+pyyaml
+
+# Deep Learning Framework (choose one)
+# tensorflow
+# torch
