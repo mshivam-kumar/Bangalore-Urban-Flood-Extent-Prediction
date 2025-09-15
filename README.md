@@ -5,13 +5,13 @@ This project aims to predict flood depth using satellite imagery and a CNN. It i
 ## Results
 
 ### Evaluation Metrics
-Loss:          0.344655
-Accuracy:      0.8809
-Precision:     0.8556
-Recall:        0.8428
-F1 Score:      0.8492
-IoU:           0.7379
-Dice Coefficient: 0.8492
+Loss:          0.344655 <br>
+Accuracy:      0.8809 <br>
+Precision:     0.8556 <br>
+Recall:        0.8428 <br>
+F1 Score:      0.8492 <br>
+IoU:           0.7379 <br>
+Dice Coefficient: 0.8492 <br> <br>
 
 ### Confusion matrix
 ![Alt text](best_model_cf.png)
