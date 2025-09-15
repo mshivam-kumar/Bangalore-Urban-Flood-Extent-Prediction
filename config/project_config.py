@@ -33,6 +33,7 @@ MAIN_PIPELINE_LOG = LOGS_DIR / "main_pipeline.log"
 
 # --- MODEL HYPERPARAMETERS ---
 AOI = [77.45, 12.85, 77.75, 13.10] # Bangalore metropolitan area
+AOI_DATABASE_PATH = DATA_DIR / "aoi_database_india.json" # state/district bounding boxes
 START_DATE = "2023-07-01"
 # END_DATE = "2023-09-30"
 END_DATE = "2023-07-05" # For testing purposes, use a small date range
@@ -42,3 +43,5 @@ DOWNLOAD_PATCH_SIZE = 250 # So now if patch size deviate then we can pad near to
 PADDED_PATCH_SIZE = 256 # 256x256 pixels image (interim data to make consistent patches by padding)
 DEGREE_SIZE = 1.0 # 1° tiles
 SCALE = 10 # 10m resolution
+
+PERMANENT_WATER_THRESHOLD = 50 # Percentage threshold for permanent water detection

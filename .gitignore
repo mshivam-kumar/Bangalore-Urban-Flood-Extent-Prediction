@@ -31,6 +31,8 @@ venv.bak/
 /outputs/
 /docs/
 
+/src/data/download.py
+
 # Log files
 /logs/
 *.log
