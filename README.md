@@ -14,7 +14,7 @@ IoU:           0.7379
 Dice Coefficient: 0.8492
 
 ### Confusion matrix
-! (Bangalore-Urban-Flood-Extent-Prediction/best_model_cf.png)
+! [Alt text] (best_model_cf.png)
 
 ## Setup
 
