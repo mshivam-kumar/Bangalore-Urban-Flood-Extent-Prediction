@@ -2,6 +2,21 @@
 
 This project aims to predict flood depth using satellite imagery and a CNN. It is structured for enterprise-level scalability, maintainability, and includes a professional logging system.
 
+## Results
+==================================================
+EVALUATION METRICS
+==================================================
+Loss:          0.344655
+Accuracy:      0.8809
+Precision:     0.8556
+Recall:        0.8428
+F1 Score:      0.8492
+IoU:           0.7379
+Dice Coefficient: 0.8492
+
+## Confusion matrix
+! best_model_cf.png
+
 ## Setup
 
 1.  **Create Project:** Run `python setup_project.py` to generate the structure.
