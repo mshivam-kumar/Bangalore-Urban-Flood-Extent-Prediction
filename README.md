@@ -16,6 +16,10 @@ Dice Coefficient: 0.8492 <br> <br>
 ### Confusion matrix
 ![Alt text](best_model_cf.png)
 
+## Ground Truth Vs Prediction comparision
+![Alt text](gt_vs_pred0.png)                ![Alt text](gt_vs_pred1.png)
+
+
 ## Setup
 
 1.  **Create Project:** Run `python setup_project.py` to generate the structure.

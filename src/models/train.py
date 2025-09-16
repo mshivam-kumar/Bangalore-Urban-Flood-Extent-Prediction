@@ -4,6 +4,8 @@ import torch.optim as optim
 from tqdm import tqdm
 from src.utils import plots
 from src.models.loss import masked_bce_loss
+from config import project_config
+from src.models.model import BinaryModel, BinaryModelDeeper
 
 def train_model(model, train_loader, val_loader, epochs, pad_val, nodata_dict, channel_names, model_dir="", plots_dir=""):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -35,7 +37,7 @@ def train_model(model, train_loader, val_loader, epochs, pad_val, nodata_dict, c
         model.train()
         train_loss = 0.0
 
-        for features_dict, labels in tqdm(train_loader, desc=f"Epoch {epoch+1}/{epochs} [Train]"):
+        for features_dict, labels in tqdm(train_loader, desc=f"Epoch {epoch}/{epochs} [Train]"):
             stack_lst = []
             for channel_name in channel_names:
                 if channel_name == "Rainfall":  # we are handling rainfall separately below
@@ -72,7 +74,7 @@ def train_model(model, train_loader, val_loader, epochs, pad_val, nodata_dict, c
         model.eval()
         val_loss = 0.0
         with torch.no_grad():
-            for features_dict, labels in tqdm(val_loader, desc=f"Epoch {epoch+1}/{epochs} [Val]"):
+            for features_dict, labels in tqdm(val_loader, desc=f"Epoch {epoch}/{epochs} [Val]"):
                 stack_lst = []
                 for channel_name in channel_names:
                     if channel_name == "Rainfall":
@@ -139,3 +141,63 @@ def train_model(model, train_loader, val_loader, epochs, pad_val, nodata_dict, c
     #     print(f"Loaded best model from epoch {best_epoch} with validation loss: {best_val_loss:.4f}")
     
     return model, best_val_loss
+
+
+def load_trained_model(model, model_path, device=None, optimizer_class=None):
+    """
+    Load a trained model from a saved checkpoint.
+    
+    Args:
+        model_class: The model class (e.g., UNet2d, FNO2d, etc.).
+        model_path (str or Path): Path to checkpoint (best_model.pth or final_model.pth).
+        device (str): 'cuda' or 'cpu'. If None, auto-detect.
+        optimizer_class: (Optional) torch.optim optimizer class (e.g., torch.optim.Adam).
+        
+    Returns:
+        model: Model with loaded weights.
+        optimizer: Loaded optimizer state (if optimizer_class is provided).
+        epoch: The epoch number at which it was saved.
+        train_loss: Last training loss.
+        val_loss: Last validation loss.
+    """
+    if device is None:
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+
+    # Load checkpoint
+    checkpoint = torch.load(model_path, map_location=device)
+
+    # Initialize model
+    model = model.to(device)
+    model.load_state_dict(checkpoint["model_state_dict"])
+
+    # Restore optimizer (optional)
+    optimizer = None
+    if optimizer_class is not None:
+        optimizer = optimizer_class(model.parameters(), lr=1e-3)  # same LR as training
+        optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+
+    epoch = checkpoint.get("epoch", None)
+    train_loss = checkpoint.get("train_loss", None)
+    val_loss = checkpoint.get("val_loss", None)
+
+    print(f"Loaded model from {model_path} (epoch {epoch}, val_loss={val_loss:.4f})")
+
+    return model, optimizer, epoch, train_loss, val_loss
+
+
+# Path to saved checkpoint
+# model_path = "checkpoints/best_model.pth"
+model = BinaryModel(in_channels=5, out_channels=1)
+
+tag = f"final_th_16_5_features_6_epochs_100"
+model_dir = project_config.OUTPUT_DIR / tag / "model"
+model_path = model_dir / "best_model.pth"
+
+# Load model + optimizer
+model, optimizer, epoch, train_loss, val_loss = load_trained_model(
+    model=model, 
+    model_path=model_path, 
+    optimizer_class=torch.optim.Adam  # optional
+)
+
+
