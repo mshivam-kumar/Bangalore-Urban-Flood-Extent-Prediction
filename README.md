@@ -30,7 +30,8 @@ Dice Coefficient: 0.8492 <br> <br>
     source venv/bin/activate
     pip install -r requirements.txt
     ```
-4.  **Run Pipeline:** `python main.py`
+4.  **Run Pipeline:** using main.ipynb
+5. **Test Flask API:** using test_api_from_client_side.ipynb
 
 ## Logging
 
