@@ -17,7 +17,8 @@ Dice Coefficient: 0.8492 <br> <br>
 ![Alt text](best_model_cf.png)
 
 ## Ground Truth Vs Prediction comparision
-![Alt text](gt_vs_pred0.png)                ![Alt text](gt_vs_pred1.png)
+![Alt text](gt_vs_pred0.png) <br>
+![Alt text](gt_vs_pred1.png)
 
 
 ## Setup
